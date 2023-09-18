@@ -1,14 +1,15 @@
-from drive_outh import Google
-from drive_create_folder import DriveHandlerActions
-from drive_upload_files import Upload
+from drive_outh import TokenOuthGoogleDrive
+from drive_create_folder import ActionsFolderFromGoogleDrive
+from drive_upload_files import GoogleDriveUploadFiles
 
-if __name__ == '__main__':
-  #Instance
-  myDrive = Google()
-  handle = DriveHandlerActions()
-  upload_files = Upload()
+if __name__ == "__main__":
+  # Instance
+  token_drive = TokenOuthGoogleDrive()
+  handle_folder = ActionsFolderFromGoogleDrive()
+  handle_upload = GoogleDriveUploadFiles()
 
-  creds = myDrive.getCredentialFromDrive()
-  #handle.create_folder(creds)
-  folder_id = handle.getIdFolderMain()
-  upload_files.setBackup( creds,folder_id )
+  service = token_drive.getCredentialFromDrive()
+# token_drive.getListDocumentsFromDrive()
+# handle_folder.create_folder(service)
+# folder_id = handle_folder.getIdFolderMain()
+# handle_upload.uploadFile(service, folder_id)
