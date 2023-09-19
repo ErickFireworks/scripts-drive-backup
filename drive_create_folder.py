@@ -1,10 +1,24 @@
 from __future__ import print_function
 from googleapiclient.errors import HttpError
+from datetime import date
 import os.path
 import json
-
+import os
 
 class ActionsFolderFromGoogleDrive:
+
+  def __init__(self):
+    today = date.today()
+
+    path = f'./backup-{today}'
+    isExist = os.path.exists(path)
+
+    if isExist is False:
+      os.system(F"mkdir backup-{today}")
+    else: 
+      print( "Folder Exist" )
+
+
   def create_folder(self, service):
     """Create a folder and prints the folder ID
     Returns : Folder Id
@@ -21,9 +35,7 @@ class ActionsFolderFromGoogleDrive:
           "mimeType": "application/vnd.google-apps.folder",
       }
 
-      # pylint: disable=maybe-no-member
       file = service.files().create(body=file_metadata, fields="id").execute()
-      # print(F'Folder ID: "{file.get("id")}".')
 
       folder = {"id": file.get("id")}
 
