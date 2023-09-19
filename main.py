@@ -10,10 +10,11 @@ if __name__ == "__main__":
   today = date.today()
   # Instance
   token_drive = TokenOuthGoogleDrive()
-  handle_folder = ActionsFolderFromGoogleDrive(today)
-  handle_upload = GoogleDriveUploadFiles()
-
   service = token_drive.getCredentialFromDrive()
+
+  handle_folder = ActionsFolderFromGoogleDrive(service, today)
+  handle_upload = GoogleDriveUploadFiles(service)
+
   folder_main_id = handle_folder.getIdFolderMain()
 
   print("\nBienvenido al sistema de respaldos.\n")

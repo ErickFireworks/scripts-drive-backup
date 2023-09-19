@@ -6,8 +6,9 @@ import os
 
 class ActionsFolderFromGoogleDrive:
 
-  def __init__(self, today_date):
+  def __init__(self, service ,today_date):
     self.today = today_date
+    self.service = service
 
     path = f'./backup-{self.today}'
     isExist = os.path.exists(path)
@@ -17,7 +18,7 @@ class ActionsFolderFromGoogleDrive:
     else: 
       print( "Folder Exist" )
 
-  def create_folder(self, service, folder_main_id):
+  def create_folder(self, folder_main_id):
     try:
       # create drive api client
       file_metadata = {
@@ -26,7 +27,7 @@ class ActionsFolderFromGoogleDrive:
           "parents": [folder_main_id]
       }
 
-      file = service.files().create(body=file_metadata, fields="id").execute()
+      file = self.service.files().create(body=file_metadata, fields="id").execute()
 
       return file.get("id")
 
@@ -34,7 +35,7 @@ class ActionsFolderFromGoogleDrive:
       print(f"An error occurred: {error}")
       return None
 
-  def create_folder_main(self, service):
+  def create_folder_main(self):
     """Create a folder and prints the folder ID
     Returns : Folder Id
 
@@ -50,7 +51,7 @@ class ActionsFolderFromGoogleDrive:
           "mimeType": "application/vnd.google-apps.folder",
       }
 
-      file = service.files().create(body=file_metadata, fields="id").execute()
+      file = self.service.files().create(body=file_metadata, fields="id").execute()
 
       folder = {"id": file.get("id")}
 

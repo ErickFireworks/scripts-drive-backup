@@ -3,11 +3,15 @@ from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaFileUpload
 
 class GoogleDriveUploadFiles:
-  def uploadFile(self, service, folder_id):
+
+  def __init__(self, service):
+    self.service = service
+
+  def uploadFile(self, folder_id):
 
     try:
       results = (
-        service.files()
+        self.service.files()
         .list(
           q="name = 'BackupFireworksStudio'",
           fields="nextPageToken, files(id, name)",
@@ -36,7 +40,7 @@ class GoogleDriveUploadFiles:
       media = MediaFileUpload("id_folder_main.json", resumable=True)
 
       file = (
-        service.files()
+        self.service.files()
         .create(body=file_metadata, media_body=media, fields="id")
         .execute()
       )
