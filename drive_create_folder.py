@@ -15,8 +15,8 @@ class ActionsFolderFromGoogleDrive:
 
     if isExist is False:
       os.system(F"mkdir backup-{self.today}")
-    else: 
-      print( "Folder Exist" )
+    # else: 
+    #   print( "Folder Exist" )
 
   def create_folder(self, folder_main_id):
     try:

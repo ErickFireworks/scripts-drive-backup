@@ -7,8 +7,11 @@ class GoogleDriveUploadFiles:
   def __init__(self, service):
     self.service = service
 
-  def uploadFile(self, folder_id):
-
+  def uploadFile(self, documents, folder_id_current):
+    
+    #Get path lisf of files to upload to drive
+    #Create progress bar when upload files
+    
     try:
       results = (
         self.service.files()
@@ -26,7 +29,7 @@ class GoogleDriveUploadFiles:
         return
 
       for item in items:
-        if item["id"] == folder_id:
+        if item["id"] == folder_id_current:
           print(item)
         else:
           print("does not exist")
@@ -35,7 +38,7 @@ class GoogleDriveUploadFiles:
 
       file_metadata = {
         "name": "id_folder_main.json", 
-        "parents": [folder_id]
+        "parents": [folder_id_current]
       }
       media = MediaFileUpload("id_folder_main.json", resumable=True)
 

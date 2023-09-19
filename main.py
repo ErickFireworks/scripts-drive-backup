@@ -12,6 +12,9 @@ if __name__ == "__main__":
   token_drive = TokenOuthGoogleDrive()
   service = token_drive.getCredentialFromDrive()
 
+  website_backup = WebsiteBackup(today)
+  database_backup = DatabaseBackup(today)
+
   handle_folder = ActionsFolderFromGoogleDrive(service, today)
   handle_upload = GoogleDriveUploadFiles(service)
 
@@ -30,20 +33,20 @@ if __name__ == "__main__":
 
     choice = input("\n¿Que te gustaría realizar?\n")
 
+    #Generate tracking every task is complete with a log in screen
+
     if choice == "1":
-      website_backup = WebsiteBackup(today)
       website_backup.createWebsiteBackup()
+
     elif choice == "2":
-      database_backup = DatabaseBackup(today)
       database_backup.createDatabaseBackup()
+
     elif choice == "3":
-      handle_folder.create_folder(service, folder_main_id)
-      # handle_upload.uploadFile(service, folder_id)
+      folder_id_current = handle_folder.create_folder(folder_main_id)
+      handle_upload.uploadFile( documents, folder_id_current)
+
     elif choice == "q":
       print("\nGracias por usar el sistema de respaldos.\n")
       break
     else:
       print("\nNo entiendo la elección, por favor intenta de nuevo!!!.\n")
-
-# token_drive.getListDocumentsFromDrive()
-# handle_folder.create_folder(service)
