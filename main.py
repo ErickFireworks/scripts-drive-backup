@@ -11,6 +11,7 @@ if __name__ == "__main__":
   handle_upload = GoogleDriveUploadFiles()
 
   service = token_drive.getCredentialFromDrive()
+  folder_id = handle_folder.getIdFolderMain()
 
   print("\nBienvenido al sistema de respaldos.\n")
 
@@ -31,18 +32,13 @@ if __name__ == "__main__":
     elif choice == "2":
       database_backup = DatabaseBackup()
       database_backup.createDatabaseBackup()
-    # elif choice == "3":
-      
+    elif choice == "3":
+      handle_upload.uploadFile(service, folder_id)
     elif choice == "q":
       print("\nGracias por usar el sistema de respaldos.\n")
       break
     else:
       print("\nNo entiendo la elección, por favor intenta de nuevo!!!.\n")
 
-# name = input('What is your name?\n')
-# print( name )
-
 # token_drive.getListDocumentsFromDrive()
 # handle_folder.create_folder(service)
-# folder_id = handle_folder.getIdFolderMain()
-# handle_upload.uploadFile(service, folder_id)

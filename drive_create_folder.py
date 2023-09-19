@@ -18,8 +18,24 @@ class ActionsFolderFromGoogleDrive:
     else: 
       print( "Folder Exist" )
 
+  def create_folder(self, service, name_folder, folder_main_id):
+    try:
+      # create drive api client
+      file_metadata = {
+          "name": f"{name_folder}",
+          "mimeType": "application/vnd.google-apps.folder",
+          "parents": [folder_main_id]
+      }
 
-  def create_folder(self, service):
+      file = service.files().create(body=file_metadata, fields="id").execute()
+
+      return file.get("id")
+
+    except HttpError as error:
+      print(f"An error occurred: {error}")
+      return None
+
+  def create_folder_main(self, service):
     """Create a folder and prints the folder ID
     Returns : Folder Id
 

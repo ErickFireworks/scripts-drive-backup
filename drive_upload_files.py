@@ -1,10 +1,14 @@
 from __future__ import print_function
 from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaFileUpload
+# from datetime import date
 
 
 class GoogleDriveUploadFiles:
   def uploadFile(self, service, folder_id):
+
+    # today = date.today()
+
     try:
       results = (
         service.files()
@@ -29,9 +33,12 @@ class GoogleDriveUploadFiles:
           # Create Error in case does not exist folder
           return
 
-      file_metadata = {"name": "id_folder_main.json", "parents": [folder_id]}
+      file_metadata = {
+        "name": "id_folder_main.json", 
+        "parents": [folder_id]
+      }
       media = MediaFileUpload("id_folder_main.json", resumable=True)
-      # pylint: disable=maybe-no-member
+
       file = (
         service.files()
         .create(body=file_metadata, media_body=media, fields="id")
