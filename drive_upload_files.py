@@ -7,11 +7,13 @@ class GoogleDriveUploadFiles:
   def __init__(self, service):
     self.service = service
 
-  def uploadFile(self, documents, folder_id_current):
+  def uploadFile(self, files_path, folder_id_current):
     
-    #Get path lisf of files to upload to drive
-    #Create progress bar when upload files
-    
+    #TODO: Loop files and upload
+    print( files_path )
+    #TODO Create progress bar when upload files
+    return
+  
     try:
       results = (
         self.service.files()

@@ -7,3 +7,4 @@ class WebsiteBackup:
   def createWebsiteBackup(self):
     cmd = f'zip -0 -r backup-{self.today}.zip /home/erick_93/aprovisionamiento && mv backup-{self.today}.zip ./backup-{self.today}'
     os.system(cmd)
+    return os.path.abspath(f"./backup-{self.today}/backup-{self.today}.zip")
