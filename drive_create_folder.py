@@ -1,28 +1,27 @@
 from __future__ import print_function
 from googleapiclient.errors import HttpError
-from datetime import date
 import os.path
 import json
 import os
 
 class ActionsFolderFromGoogleDrive:
 
-  def __init__(self):
-    today = date.today()
+  def __init__(self, today_date):
+    self.today = today_date
 
-    path = f'./backup-{today}'
+    path = f'./backup-{self.today}'
     isExist = os.path.exists(path)
 
     if isExist is False:
-      os.system(F"mkdir backup-{today}")
+      os.system(F"mkdir backup-{self.today}")
     else: 
       print( "Folder Exist" )
 
-  def create_folder(self, service, name_folder, folder_main_id):
+  def create_folder(self, service, folder_main_id):
     try:
       # create drive api client
       file_metadata = {
-          "name": f"{name_folder}",
+          "name": f"backup-{self.today}",
           "mimeType": "application/vnd.google-apps.folder",
           "parents": [folder_main_id]
       }

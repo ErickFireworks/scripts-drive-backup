@@ -1,13 +1,9 @@
 from __future__ import print_function
 from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaFileUpload
-# from datetime import date
-
 
 class GoogleDriveUploadFiles:
   def uploadFile(self, service, folder_id):
-
-    # today = date.today()
 
     try:
       results = (

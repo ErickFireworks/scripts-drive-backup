@@ -1,9 +1,9 @@
 import os
-from datetime import date
 
 class WebsiteBackup:
-  def createWebsiteBackup(self):
-    today = date.today()
+  def __init__(self, today_date):
+    self.today = today_date
 
-    cmd = f'zip -0 -r backup-{today}.zip /home/erick_93/aprovisionamiento && mv backup-{today}.zip ./backup-{today}'
+  def createWebsiteBackup(self):
+    cmd = f'zip -0 -r backup-{self.today}.zip /home/erick_93/aprovisionamiento && mv backup-{self.today}.zip ./backup-{self.today}'
     os.system(cmd)

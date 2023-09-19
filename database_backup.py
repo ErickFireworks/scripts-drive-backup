@@ -1,9 +1,10 @@
 import os
-from datetime import date
 
 class DatabaseBackup:
-  def createDatabaseBackup():
-    today = date.today()
 
-    cmd = f'mysqldump -u root -p namedatabase >backup-{today}-.sql'
+  def __init__(self, today_date):
+    self.today = today_date
+
+  def createDatabaseBackup(self):
+    cmd = f'mysqldump -u root -p namedatabase >backup-{self.today}-.sql'
     os.system(cmd)
