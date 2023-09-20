@@ -21,10 +21,10 @@ class GoogleDriveUploadFiles:
   
   def handleUploadDrive(self, file_name ,folder_id_current):
       file_metadata = {
-        "name": file_name, 
+        "name": file_name["name"], 
         "parents": [folder_id_current]
       }
-      media = MediaFileUpload(file_name, resumable=True)
+      media = MediaFileUpload(file_name["path"], resumable=True)
 
       file = (
         self.service.files()

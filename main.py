@@ -52,6 +52,6 @@ if __name__ == "__main__":
       print("\nThank you for using the backup system.\n")
       file_paths = []
       break
+    
     else:
       print("\nI don't understand the choice, please try again.!!!.\n")
-    
