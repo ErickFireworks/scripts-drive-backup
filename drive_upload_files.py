@@ -9,40 +9,22 @@ class GoogleDriveUploadFiles:
 
   def uploadFile(self, files_path, folder_id_current):
     
-    #TODO: Loop files and upload
-    print( files_path )
-    #TODO Create progress bar when upload files
-    return
-  
     try:
-      results = (
-        self.service.files()
-        .list(
-          q="name = 'BackupFireworksStudio'",
-          fields="nextPageToken, files(id, name)",
-        )
-        .execute()
-      )
 
-      items = results.get("files", [])
+      for file in files_path:
+        print('upload file ...')
+        self.handleUploadDrive(file, folder_id_current)
 
-      if not items:
-        print("No files found.")
-        return
-
-      for item in items:
-        if item["id"] == folder_id_current:
-          print(item)
-        else:
-          print("does not exist")
-          # Create Error in case does not exist folder
-          return
-
+    except HttpError as error:
+      print(f"An error occurred: {error}")
+      return None
+  
+  def handleUploadDrive(self, file_name ,folder_id_current):
       file_metadata = {
-        "name": "id_folder_main.json", 
+        "name": file_name, 
         "parents": [folder_id_current]
       }
-      media = MediaFileUpload("id_folder_main.json", resumable=True)
+      media = MediaFileUpload(file_name, resumable=True)
 
       file = (
         self.service.files()
@@ -50,8 +32,3 @@ class GoogleDriveUploadFiles:
         .execute()
       )
       print(f'File ID: "{file.get("id")}".')
-      return file.get("id")
-
-    except HttpError as error:
-      print(f"An error occurred: {error}")
-      return None

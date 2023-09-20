@@ -15,8 +15,7 @@ class ActionsFolderFromGoogleDrive:
 
     if isExist is False:
       os.system(F"mkdir backup-{self.today}")
-    # else: 
-    #   print( "Folder Exist" )
+
 
   def create_folder(self, folder_main_id):
     try:
@@ -71,3 +70,6 @@ class ActionsFolderFromGoogleDrive:
       with open("id_folder_main.json", "r") as openfile:
         json_object = json.load(openfile)
         return json_object["id"]
+      
+  def deleteFolderTempFiles(self):
+    os.system(F"rm -rf backup-{self.today}")

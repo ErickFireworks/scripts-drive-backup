@@ -48,12 +48,12 @@ if __name__ == "__main__":
     elif choice == "3":
       folder_id_current = handle_folder.create_folder(folder_main_id)
       handle_upload.uploadFile( file_paths, folder_id_current)
+      handle_folder.deleteFolderTempFiles()
 
     elif choice == "q":
       print("\nGracias por usar el sistema de respaldos.\n")
+      file_paths = []
       break
     else:
       print("\nNo entiendo la elección, por favor intenta de nuevo!!!.\n")
     
-    file_paths = []
-    #Delete File Temps
