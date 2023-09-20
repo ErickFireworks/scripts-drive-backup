@@ -19,7 +19,7 @@ class ActionsFolderFromGoogleDrive:
 
   def create_folder(self, folder_main_id):
     try:
-      # create drive api client
+
       file_metadata = {
           "name": f"backup-{self.today}",
           "mimeType": "application/vnd.google-apps.folder",

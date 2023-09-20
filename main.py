@@ -22,20 +22,18 @@ if __name__ == "__main__":
 
   folder_main_id = handle_folder.getIdFolderMain()
 
-  print("\nBienvenido al sistema de respaldos.\n")
+  print("\nWelcome to the backup system.\n")
 
   choice = ''
 
   while choice != 'q':
 
-    print("\n[1] Respaldar sitio.")
-    print("[2] Respaldar Base de Datos.")
-    print("[3] Subir respaldo a drive.")
+    print("\n[1] Backup WebSite.")
+    print("[2] Backup Database.")
+    print("[3] Upload Backup to Google drive.")
     print("[q] Enter q to quit.\n")
 
-    choice = input("\n¿Que te gustaría realizar?\n")
-
-    #TODO: Generate tracking every task is complete with a log in screen
+    choice = input("\nWhat would you like to do?\n")
 
     if choice == "1":
       path_file_zip = website_backup.createWebsiteBackup()
@@ -51,9 +49,9 @@ if __name__ == "__main__":
       handle_folder.deleteFolderTempFiles()
 
     elif choice == "q":
-      print("\nGracias por usar el sistema de respaldos.\n")
+      print("\nThank you for using the backup system.\n")
       file_paths = []
       break
     else:
-      print("\nNo entiendo la elección, por favor intenta de nuevo!!!.\n")
+      print("\nI don't understand the choice, please try again.!!!.\n")
     

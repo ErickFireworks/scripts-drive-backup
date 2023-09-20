@@ -7,9 +7,6 @@ from googleapiclient.errors import HttpError
 
 import os.path
 
-# If modifying these scopes, delete the file token.json.
-# SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly']
-
 SCOPES = [
   "https://www.googleapis.com/auth/drive",
   "https://www.googleapis.com/auth/drive.file",
@@ -23,14 +20,10 @@ class TokenOuthGoogleDrive:
     Prints the names and ids of the first 10 files the user has access to.
     """
     creds = None
-    # The file token.json stores the user's access and refresh tokens, and is
-    # created automatically when the authorization flow completes for the first
-    # time.
-    # Code
+
     if os.path.exists("token.json"):
         creds = Credentials.from_authorized_user_file("token.json", SCOPES)
-    # End Code
-    # If there are no (valid) credentials available, let the user log in.
+
     if not creds or not creds.valid:
       if creds and creds.expired and creds.refresh_token:
         creds.refresh(Request())
@@ -39,7 +32,7 @@ class TokenOuthGoogleDrive:
           "credentials.json", SCOPES
         )
         creds = flow.run_local_server(port=0)
-        # Save the credentials for the next run
+
         with open("token.json", "w") as token:
           token.write(creds.to_json())
 
@@ -47,13 +40,10 @@ class TokenOuthGoogleDrive:
 
     return service
 
-  #TODO: Create function in case no exist folder main
-
   def getListDocumentsFromDrive(self):
     service = self.getCredentialFromDrive()
 
     try:
-      # Call the Drive v3 API
       results = (
         service.files()
         .list(pageSize=10, fields="nextPageToken, files(id, name)")
@@ -70,5 +60,4 @@ class TokenOuthGoogleDrive:
         print("{0} ({1})".format(item["name"], item["id"]))
 
     except HttpError as error:
-      # TODO(developer) - Handle errors from drive API.
       print(f"An error occurred: {error}")
