@@ -23,7 +23,7 @@ if __name__ == "__main__":
   #Get the folder that will have all the backups
   folder_main_id = handle_folder.getIdFolderMain()
 
-  print("\nInitiating site backup.\n")
+  print("\nInitiating site backup!!!.\n")
 
   #Create packing zip website
   path_file_zip = website_backup.createWebsiteBackup()
@@ -38,5 +38,5 @@ if __name__ == "__main__":
   handle_upload.uploadFile( file_paths, folder_id_current)
   handle_folder.deleteFolderTempFiles()
 
-  print("\nComplete backup.\n")
+  print("\nComplete backup!!!.\n")
   file_paths = []
