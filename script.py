@@ -6,6 +6,8 @@ from website_backup import WebsiteBackup
 from database_backup import DatabaseBackup
 from datetime import date
 
+import json
+
 if __name__ == "__main__":
   today = date.today()
   file_paths = []
@@ -28,14 +30,19 @@ if __name__ == "__main__":
   #Create packing zip website
   path_file_zip = website_backup.createWebsiteBackup()
   file_paths.append(path_file_zip)
+  with open(f"./backup-{today}/list_files.json", "w") as file:
+    file.write(json.dumps(file_paths))
 
   #Create file SQL 
   path_file_sql = database_backup.createDatabaseBackup()
   file_paths.append(path_file_sql)
+  with open(f"./backup-{today}/list_files.json", "w") as file:
+    file.write(json.dumps(file_paths))
 
   #Creates the folder where backups are set up and upload files to drive
+  list_files = list(open(f"./backup-{today}/list_files.json", "r"))
   folder_id_current = handle_folder.create_folder(folder_main_id)
-  handle_upload.uploadFile( file_paths, folder_id_current)
+  handle_upload.uploadFile( list_files, folder_id_current)
   handle_folder.deleteFolderTempFiles()
 
   print("\nComplete backup!!!.\n")
