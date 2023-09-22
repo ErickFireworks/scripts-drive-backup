@@ -14,16 +14,16 @@ class ActionsFolderFromGoogleDrive:
     isExist = os.path.exists(path)
 
     if isExist is False:
-      os.system(F"mkdir backup-{self.today}")
+      os.system(F"mkdir backup-{self.today} && touch list_files.json && mv list_files.json backup-{self.today}")
 
 
   def create_folder(self, folder_main_id):
     try:
 
       file_metadata = {
-          "name": f"backup-{self.today}",
-          "mimeType": "application/vnd.google-apps.folder",
-          "parents": [folder_main_id]
+        "name": f"backup-{self.today}",
+        "mimeType": "application/vnd.google-apps.folder",
+        "parents": [folder_main_id]
       }
 
       file = self.service.files().create(body=file_metadata, fields="id").execute()
@@ -46,8 +46,8 @@ class ActionsFolderFromGoogleDrive:
     try:
       # create drive api client
       file_metadata = {
-          "name": "BackupFireworksStudio",
-          "mimeType": "application/vnd.google-apps.folder",
+        "name": "BackupFireworksStudio",
+        "mimeType": "application/vnd.google-apps.folder",
       }
 
       file = self.service.files().create(body=file_metadata, fields="id").execute()
@@ -57,7 +57,7 @@ class ActionsFolderFromGoogleDrive:
       json_object = json.dumps(folder, indent=2)
 
       with open("id_folder_main.json", "w") as outfile:
-          outfile.write(json_object)
+        outfile.write(json_object)
 
       return file.get("id")
 
