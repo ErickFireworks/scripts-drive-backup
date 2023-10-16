@@ -9,7 +9,7 @@ class DatabaseBackup:
     print('\nCreate backup data base ...\n')
 
     cmd = f'mysqldump -u root -p namedatabase >backup-{self.today}.sql && mv backup-{self.today}.sql ./backup-{self.today}'
-    # cmd = f'cp db_test.sql ./backup-{self.today}/backup-{self.today}.sql'
+    #cmd = f'cp db_test.sql ./backup-{self.today}/backup-{self.today}.sql'
     os.system(cmd)
 
     print('\nFinish backup data base ...\n')
