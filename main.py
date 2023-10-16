@@ -50,11 +50,10 @@ if __name__ == "__main__":
         token.write(json.dumps(file_paths)) 
 
     elif choice == "3":
+      # list_files = list(open(f"./backup-{today}/list_files.json", "r"))
       with open(f"./backup-{today}/list_files.json") as f:
-        list_files = json.loads(f.read())
-      
-      folder_id_current = handle_folder.create_folder(folder_main_id)
-      handle_upload.uploadFile( list_files, folder_id_current)
+         list_files = json.loads(f.read())
+      handle_upload.uploadFile( list_files, folder_main_id, handle_folder)
       handle_folder.deleteFolderTempFiles()
 
     elif choice == "q":

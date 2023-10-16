@@ -7,16 +7,19 @@ class GoogleDriveUploadFiles:
   def __init__(self, service):
     self.service = service
 
-  def uploadFile(self, files_path, folder_id_current):
+  def uploadFile(self, files_path, folder_main_id, handle_folder):
     
     try:
+
+      folder_id_current = handle_folder.create_folder(folder_main_id)
 
       for file in files_path:
         print('upload file ...')
         self.handleUploadDrive(file, folder_id_current)
 
-    except HttpError as error:
+    except Exception as error:
       print(f"An error occurred: {error}")
+      handle_folder.deleteFolderDrive(folder_id_current)
       return None
   
   def handleUploadDrive(self, file_name ,folder_id_current):
@@ -31,4 +34,4 @@ class GoogleDriveUploadFiles:
       .create(body=file_metadata, media_body=media, fields="id")
       .execute()
     )
-    print(f'File ID: "{file.get("id")}".')
+    print(f'File ID: "{file.get("id")}"')

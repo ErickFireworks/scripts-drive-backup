@@ -73,3 +73,8 @@ class ActionsFolderFromGoogleDrive:
       
   def deleteFolderTempFiles(self):
     os.system(F"rm -rf backup-{self.today}")
+
+  def deleteFolderDrive(self, folder_id):
+    self.service.files().delete(fileId=folder_id).execute()
+    print('Delete folder drive')
+
