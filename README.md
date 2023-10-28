@@ -29,7 +29,7 @@ Attach this file to the root of your project.
 Execute the following command:
 
 ```
-python3 verify_python.py
+python3 testing.py
 ```
 
 Run the following command to authorize that you will use the google drive API and which account will have access to the files.
