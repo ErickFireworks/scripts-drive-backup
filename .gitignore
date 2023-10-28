@@ -162,4 +162,3 @@ cython_debug/
 *.json
 .vscode
 *.zip
-*.sql

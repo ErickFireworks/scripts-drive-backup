@@ -61,3 +61,28 @@ class TokenOuthGoogleDrive:
 
     except HttpError as error:
       print(f"An error occurred: {error}")
+
+  def searchDocumentsFromDrive(self):
+    service = self.getCredentialFromDrive()
+
+    # Search all drive (no access shared drive folder)
+    # results = service.files().list().execute()
+
+    # Search all folders (no access shared drive folder)
+    # results = service.files().list(q="mimeType='application/vnd.google-apps.folder'").execute()
+
+    # search for all folders containing the word 'Carpeta' (Access shared drive folder)
+    # results = service.files().list(
+    #      q="fullText contains 'carpeta' and mimeType = 'application/vnd.google-apps.folder'",
+    #      includeItemsFromAllDrives=True, 
+    #      supportsAllDrives=True, 
+    #      fields="nextPageToken, files(id, name)").execute()
+
+    # search for all (Access shared drive folder)
+    results = service.files().list(
+         includeItemsFromAllDrives=True, 
+         supportsAllDrives=True, 
+         fields="nextPageToken, files(id, name)").execute()
+    items = results.get("files", [])
+    for item in items:
+        print("{0} ({1})".format(item["name"], item["id"]))
