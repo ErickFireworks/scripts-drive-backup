@@ -3,15 +3,16 @@ import os
 
 class DatabaseBackup:
 
-    def __init__(self, today_date, site, database):
+    def __init__(self, today_date, site, database, db_password):
         self.today = today_date
         self.database = database
         self.site = site
+        self.password = db_password
 
     def createDatabaseBackup(self):
         print("\nCreate backup data base ...\n")
 
-        cmd = f"mysqldump -u root -p namedatabase > backup-{self.today}-{self.database}.sql && mv backup-{self.today}-{self.database}.sql ./{self.site}/backup-{self.today}"
+        cmd = f"mysqldump -u root -p{self.password} namedatabase > backup-{self.today}-{self.database}.sql && mv backup-{self.today}-{self.database}.sql ./{self.site}/backup-{self.today}"
         os.system(cmd)
 
         print("\nFinish backup data base ...\n")

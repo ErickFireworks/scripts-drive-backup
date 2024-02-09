@@ -15,6 +15,7 @@ if __name__ == "__main__":
     site = config["SITE"]
     database = config["DATABASE"]
     backup_path = config["BACKUP_FILES"]
+    db_password = config["DB_PASSWORD"]
     today = date.today()
     file_paths = []
 
@@ -23,7 +24,7 @@ if __name__ == "__main__":
     service = token_drive.getCredentialFromDrive()
 
     website_backup = WebsiteBackup(today, site, backup_path)
-    database_backup = DatabaseBackup(today, site, database)
+    database_backup = DatabaseBackup(today, site, database, db_password)
 
     handle_folder = ActionsFolderFromGoogleDrive(service, today)
     handle_upload = GoogleDriveUploadFiles(service)
