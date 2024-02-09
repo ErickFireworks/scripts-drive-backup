@@ -6,6 +6,7 @@ Before using this tool you must have python version 3 installed and the followin
 sudo apt update
 sudo apt install python3-pip
 pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
+pip install python-dotenv
 ```
 
 ### Configure and run an app that calls a Google Workspace API.
