@@ -12,7 +12,7 @@ class DatabaseBackup:
     def createDatabaseBackup(self):
         print("\nCreate backup data base ...\n")
 
-        cmd = f"mysqldump -u root -p{self.password} namedatabase > backup-{self.today}-{self.database}.sql && mv backup-{self.today}-{self.database}.sql ./{self.site}/backup-{self.today}"
+        cmd = f"mysqldump -u root -p{self.password} {self.database} > backup-{self.today}-{self.database}.sql && mv backup-{self.today}-{self.database}.sql ./{self.site}/backup-{self.today}"
         os.system(cmd)
 
         print("\nFinish backup data base ...\n")
