@@ -16,6 +16,7 @@ if __name__ == "__main__":
     backup_path = config["BACKUP_FILES"]
     db_password = config["DB_PASSWORD"]
     today = date.today()
+    list_files = f"./{site}/backup-{today}/list_files.json"
     file_paths = []
 
     # Instance
@@ -46,18 +47,17 @@ if __name__ == "__main__":
         if choice == "1":
             path_file_zip = website_backup.createWebsiteBackup()
             file_paths.append(path_file_zip)
-            with open(f"./backup-{today}/list_files.json", "w") as token:
+            with open(list_files, "w") as token:
                 token.write(json.dumps(file_paths))
 
         elif choice == "2":
             path_file_sql = database_backup.createDatabaseBackup()
             file_paths.append(path_file_sql)
-            with open(f"./backup-{today}/list_files.json", "w") as token:
+            with open(list_files, "w") as token:
                 token.write(json.dumps(file_paths))
 
         elif choice == "3":
-            # list_files = list(open(f"./backup-{today}/list_files.json", "r"))
-            with open(f"./backup-{today}/list_files.json") as f:
+            with open(list_files) as f:
                 list_files = json.loads(f.read())
             handle_upload.uploadFile(list_files, folder_main_id, handle_folder)
             handle_folder.deleteFolderTempFiles()
