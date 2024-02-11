@@ -1,13 +1,15 @@
+import json
+from datetime import date
+
 from drive_outh import TokenOuthGoogleDrive
 from drive_create_folder import ActionsFolderFromGoogleDrive
 from drive_upload_files import GoogleDriveUploadFiles
 
 from website_backup import WebsiteBackup
 from database_backup import DatabaseBackup
-from datetime import date
 from dotenv import dotenv_values
+from services import *
 
-import json
 
 if __name__ == "__main__":
     config = dotenv_values(".env")
@@ -47,19 +49,16 @@ if __name__ == "__main__":
         if choice == "1":
             path_file_zip = website_backup.createWebsiteBackup()
             file_paths.append(path_file_zip)
-            with open(list_files, "w") as token:
-                token.write(json.dumps(file_paths))
+            addRoutePath(list_files, file_paths)
 
         elif choice == "2":
             path_file_sql = database_backup.createDatabaseBackup()
             file_paths.append(path_file_sql)
-            with open(list_files, "w") as token:
-                token.write(json.dumps(file_paths))
+            addRoutePath(list_files, file_paths)
 
         elif choice == "3":
-            with open(list_files) as f:
-                list_files = json.loads(f.read())
-            handle_upload.uploadFile(list_files, folder_main_id, handle_folder)
+            files_uploads = getRoutePath(list_files)
+            handle_upload.uploadFile(files_uploads, folder_main_id, handle_folder)
             handle_folder.deleteFolderTempFiles()
 
         elif choice == "q":
