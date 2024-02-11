@@ -15,6 +15,7 @@ if __name__ == "__main__":
     site = config["SITE"]
     database = config["DATABASE"]
     backup_path = config["BACKUP_FILES"]
+    db_password = config["DB_PASSWORD"]
     today = date.today()
     file_paths = []
 
@@ -23,7 +24,7 @@ if __name__ == "__main__":
     service = token_drive.getCredentialFromDrive()
 
     website_backup = WebsiteBackup(today, site, backup_path)
-    database_backup = DatabaseBackup(today, site, database)
+    database_backup = DatabaseBackup(today, site, database, db_password)
 
     handle_folder = ActionsFolderFromGoogleDrive(service, today)
     handle_upload = GoogleDriveUploadFiles(service)
@@ -31,25 +32,25 @@ if __name__ == "__main__":
     # Get the folder that will have all the backups
     folder_main_id = handle_folder.getIdFolderMain()
 
-    print("\nInitiating site backup!!!.\n")
+    # print("\nInitiating site backup!!!.\n")
 
-    # Create packing zip website
-    path_file_zip = website_backup.createWebsiteBackup()
-    file_paths.append(path_file_zip)
-    with open(f"./backup-{today}/list_files.json", "w") as file:
-        file.write(json.dumps(file_paths))
+    # # Create packing zip website
+    # path_file_zip = website_backup.createWebsiteBackup()
+    # file_paths.append(path_file_zip)
+    # with open(f"./backup-{today}/list_files.json", "w") as file:
+    #     file.write(json.dumps(file_paths))
 
-    # Create file SQL
-    path_file_sql = database_backup.createDatabaseBackup()
-    file_paths.append(path_file_sql)
-    with open(f"./backup-{today}/list_files.json", "w") as file:
-        file.write(json.dumps(file_paths))
+    # # Create file SQL
+    # path_file_sql = database_backup.createDatabaseBackup()
+    # file_paths.append(path_file_sql)
+    # with open(f"./backup-{today}/list_files.json", "w") as file:
+    #     file.write(json.dumps(file_paths))
 
-    # Creates the folder where backups are set up and upload files to drive
-    list_files = list(open(f"./backup-{today}/list_files.json", "r"))
-    folder_id_current = handle_folder.create_folder(folder_main_id)
-    handle_upload.uploadFile(list_files, folder_id_current)
-    handle_folder.deleteFolderTempFiles()
+    # # Creates the folder where backups are set up and upload files to drive
+    # list_files = list(open(f"./backup-{today}/list_files.json", "r"))
+    # folder_id_current = handle_folder.create_folder(folder_main_id)
+    # handle_upload.uploadFile(list_files, folder_id_current)
+    # handle_folder.deleteFolderTempFiles()
 
-    print("\nComplete backup!!!.\n")
-    file_paths = []
+    # print("\nComplete backup!!!.\n")
+    # file_paths = []
