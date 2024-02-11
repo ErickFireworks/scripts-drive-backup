@@ -24,7 +24,7 @@ class ActionsFolderFromGoogleDrive:
         try:
 
             file_metadata = {
-                "name": f"backup-{self.today}",
+                "name": f"backup-{self.today}-{self.site}",
                 "mimeType": "application/vnd.google-apps.folder",
                 "parents": [folder_main_id],
             }
