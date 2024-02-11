@@ -25,7 +25,7 @@ if __name__ == "__main__":
     website_backup = WebsiteBackup(today, site, backup_path)
     database_backup = DatabaseBackup(today, site, database, db_password)
 
-    handle_folder = ActionsFolderFromGoogleDrive(service, today)
+    handle_folder = ActionsFolderFromGoogleDrive(service, today, site)
     handle_upload = GoogleDriveUploadFiles(service)
 
     folder_main_id = handle_folder.getIdFolderMain()

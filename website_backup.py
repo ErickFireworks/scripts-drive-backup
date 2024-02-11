@@ -10,7 +10,7 @@ class WebsiteBackup:
     def createWebsiteBackup(self):
         print("\nCreate backup website ...\n")
 
-        cmd = f"zip -0 -r backup-{self.today}-{self.site}.zip {self.backup_path } && mv backup-{self.today}-{self.site}.zip ./{self.site}/backup-{self.today}"
+        cmd = f"zip -0 -r backup-{self.today}-{self.site}.zip {self.backup_path } && mv backup-{self.today}-{self.site}.zip ./{self.site}/backup-{self.today}/"
         os.system(cmd)
 
         print("\nFinish backup website ...\n")
